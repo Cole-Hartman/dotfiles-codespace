@@ -22,6 +22,7 @@ alias ..='cd ..'
 alias b='cd'
 alias c='clear'
 alias f='fastfetch'
+alias ghcs='gh codespace list'
 
 alias fonts='cd ~/.local/share/fonts/'
 
