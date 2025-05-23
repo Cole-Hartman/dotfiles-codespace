@@ -17,8 +17,7 @@ fi
 
 ### 2. Symlink Neovim config
 echo "[dotfiles] Linking Neovim config..."
-mkdir -p ~/.config
-ln -sfn ~/dotfiles/.config/nvim ~/.config/nvim
+ln -sfn /workspaces/.codespaces/.persistedshare/dotfiles/.config/nvim ~/.config/
 
 echo "[dotfiles] Done!"
 
