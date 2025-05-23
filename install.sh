@@ -1,23 +1,40 @@
-# #!/usr/bin/env bash
-# set -e
-#
-# echo "Setting up environment..."
-#
-# # Install Neovim (v0.9.5)
-# if ! command -v nvim &>/dev/null || [[ "$(nvim --version | head -n1)" != *"v0.9.5"* ]]; then
-#   echo "[dotfiles] Installing Neovim v0.9.5..."
-#   curl -LO https://github.com/neovim/neovim/releases/download/v0.9.5/nvim-linux64.tar.gz
-#   tar xzf nvim-linux64.tar.gz
-#   sudo mv nvim-linux64 /opt/nvim
-#   sudo ln -sfn /opt/nvim/bin/nvim /usr/local/bin/nvim
-#   rm nvim-linux64.tar.gz
-# else
-#   echo "Neovim already installed."
-# fi
-#
-# # Symlink Neovim config
-# echo "Linking Neovim config..."
-# ln -sfn /workspaces/.codespaces/.persistedshare/dotfiles/.config/nvim ~/.config/
-#
-# echo "Done!"
+
+#!/usr/bin/env bash
+set -e
+
+echo "[dotfiles] Setting up environment..."
+
+# 1. Install dependencies for building Neovim
+echo "[dotfiles] Installing build dependencies..."
+sudo apt update
+sudo apt install -y \
+  ninja-build gettext libtool libtool-bin autoconf automake cmake \
+  g++ pkg-config unzip curl doxygen libncurses5-dev
+
+# 2. Build and install Neovim v0.11.1 from source
+if ! command -v nvim &>/dev/null || [[ "$(nvim --version | head -n1)" != *"v0.11.1"* ]]; then
+  echo "[dotfiles] Building Neovim v0.11.1 from source..."
+  git clone https://github.com/neovim/neovim.git
+  cd neovim
+  git checkout v0.11.1
+  make CMAKE_BUILD_TYPE=RelWithDebInfo
+  sudo make install
+  cd ..
+  rm -rf neovim
+else
+  echo "[dotfiles] Neovim v0.11.1 already installed."
+fi
+
+# 3. Symlink Neovim config from correct Codespace path
+echo "[dotfiles] Linking Neovim config from persisted path..."
+mkdir -p ~/.config
+ln -sfn /workspaces/.codespaces/.persistedshare/dotfiles/.config/nvim ~/.config/nvim
+
+# 4. Apply bashrc
+if [ -f ~/dotfiles/.bashrc ]; then
+  echo "[dotfiles] Applying .bashrc..."
+  cp ~/dotfiles/.bashrc ~/.bashrc
+fi
+
+echo "[dotfiles] Done!"
 
