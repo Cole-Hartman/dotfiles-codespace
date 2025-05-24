@@ -1,5 +1,2 @@
-# dotfiles
-Dotfiles specifically for my neovim codespace setup
+# codespace dotfiles
 
-I have modified
-- .bashrc

@@ -39,3 +39,22 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank()
 	end,
 })
+
+-- Codespace ssh clipboard support
+if vim.fn.has("nvim-0.10") == 1 then
+	local function copy(lines, _)
+		local text = table.concat(lines, '\n')
+		local encoded = vim.fn.system('base64 | tr -d "\n"', text)
+		vim.fn.chansend(vim.v.stderr, '\x1b]52;c;' .. encoded .. '\x07')
+	end
+
+	local function paste()
+		return { vim.fn.getreg(''), vim.fn.getregtype('') }
+	end
+
+	vim.g.clipboard = {
+		name = 'osc52',
+		copy = { ['+'] = copy, ['*'] = copy },
+		paste = { ['+'] = paste, ['*'] = paste },
+	}
+end
