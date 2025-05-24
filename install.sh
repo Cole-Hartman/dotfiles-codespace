@@ -31,10 +31,8 @@ mkdir -p ~/.config
 ln -sfn /workspaces/.codespaces/.persistedshare/dotfiles/.config/nvim ~/.config/nvim
 
 # 4. Move bashrc
-if [ -f ~/dotfiles/.bashrc ]; then
-  echo "[dotfiles] Moving .bashrc..."
-  cp ~/dotfiles/.bashrc ~/.bashrc
-fi
+echo "[dotfiles] Moving .bashrc..."
+cp /workspaces/.codespaces/.persistedshare/dotfiles/.bashrc ~/.bashrc
 
 echo "[dotfiles] Done!"
 
