@@ -39,5 +39,4 @@ tmux kill-session -t temp_plugin_install_session
 curl -s https://ohmyposh.dev/install.sh | bash
 cp -r /workspaces/.codespaces/.persistedshare/dotfiles/.customposhthemes ~/.customposhthemes
 
-bash -i
-
+# NOTE: If you ssh before the script is done installing then you will have to source .bashrc. This is obvious
