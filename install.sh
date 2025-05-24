@@ -39,5 +39,6 @@ tmux new-session -d -s temp_plugin_install_session
 ~/.tmux/plugins/tpm/bin/install_plugins
 tmux kill-session -t temp_plugin_install_session
 
+source ~/.bashrc
 echo "[dotfiles] GO CODE!"
 
