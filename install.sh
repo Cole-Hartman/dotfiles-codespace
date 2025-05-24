@@ -36,7 +36,7 @@ tmux new-session -d -s temp_plugin_install_session
 tmux kill-session -t temp_plugin_install_session
 
 # # oh-my-posh
-# curl -s https://ohmyposh.dev/install.sh | bash
-# cp -r /workspaces/.codespaces/.persistedshare/dotfiles/.customposhthemes ~/.customposhthemes
+curl -s https://ohmyposh.dev/install.sh | bash
+cp -r /workspaces/.codespaces/.persistedshare/dotfiles/.customposhthemes ~/.customposhthemes
 
 exec bash
