@@ -87,6 +87,9 @@ function y() {
 # export PATH="$HOME/.local/share/gem/ruby/3.3.0/bin:$PATH"
 # export PATH="$PATH:$HOME/.dotnet/tools"
 
+# Fix terminfo issue for GitHub Codespaces
+export TERM=xterm-256color
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

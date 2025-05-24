@@ -30,9 +30,9 @@ echo "[dotfiles] Linking Neovim config from persisted path..."
 mkdir -p ~/.config
 ln -sfn /workspaces/.codespaces/.persistedshare/dotfiles/.config/nvim ~/.config/nvim
 
-# 4. Apply bashrc
+# 4. Move bashrc
 if [ -f ~/dotfiles/.bashrc ]; then
-  echo "[dotfiles] Applying .bashrc..."
+  echo "[dotfiles] Moving .bashrc..."
   cp ~/dotfiles/.bashrc ~/.bashrc
 fi
 
