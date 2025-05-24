@@ -5,7 +5,6 @@ set -e
 sudo apt update
 
 # Install dependencies for building Neovim
-echo "[dotfiles] Building Neovim..."
 sudo apt install -y ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip curl doxygen libncurses5-dev
 
 # 2. Build and install Neovim v0.11.1 from source
@@ -18,16 +17,13 @@ cd ..
 rm -rf neovim
 
 # 3. Symlink Neovim config from correct Codespace path
-echo "[dotfiles] Linking Neovim config..."
 mkdir -p ~/.config
 ln -sfn /workspaces/.codespaces/.persistedshare/dotfiles/.config/nvim ~/.config/nvim
 
 # 4. Move bashrc
-echo "[dotfiles] Moving .bashrc..."
 cp /workspaces/.codespaces/.persistedshare/dotfiles/.bashrc ~/.bashrc
 
 # 5. Install Tmux
-echo "[dotfiles] Installing Tmux..."
 sudo apt install -y tmux
 cp /workspaces/.codespaces/.persistedshare/dotfiles/.tmux.conf ~/.tmux.conf
 
@@ -39,5 +35,4 @@ tmux new-session -d -s temp_plugin_install_session
 ~/.tmux/plugins/tpm/bin/install_plugins
 tmux kill-session -t temp_plugin_install_session
 
-echo "[dotfiles] GO CODE!"
-
+exec bash
