@@ -4,10 +4,10 @@ set -e
 
 sudo apt update
 
-# Install dependencies for building Neovim
+# Dependencies for building Neovim
 sudo apt install -y ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip curl doxygen libncurses5-dev
 
-# 2. Build and install Neovim v0.11.1 from source
+# Build and install Neovim v0.11.1 from source
 git clone https://github.com/neovim/neovim.git
 cd neovim
 git checkout v0.11.1
@@ -16,23 +16,27 @@ sudo make install
 cd ..
 rm -rf neovim
 
-# 3. Symlink Neovim config from correct Codespace path
+# Symlink Neovim config from correct Codespace path
 mkdir -p ~/.config
 ln -sfn /workspaces/.codespaces/.persistedshare/dotfiles/.config/nvim ~/.config/nvim
 
-# 4. Move bashrc
+# Move bashrc
 cp /workspaces/.codespaces/.persistedshare/dotfiles/.bashrc ~/.bashrc
 
-# 5. Install Tmux
+# Tmux
 sudo apt install -y tmux
 cp /workspaces/.codespaces/.persistedshare/dotfiles/.tmux.conf ~/.tmux.conf
 
-# Install Tmux plugin manager
+# Tmux plugin manager
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 # Temporarily start a detached tmux session to install plugins
 tmux new-session -d -s temp_plugin_install_session
 ~/.tmux/plugins/tpm/bin/install_plugins
 tmux kill-session -t temp_plugin_install_session
+
+# oh-my-posh
+curl -s https://ohmyposh.dev/install.sh | bash
+cp /workspaces/.codespaces/.persistedshare/dotfiles/.customposhthemes ~/.customposhthemes
 
 exec bash
